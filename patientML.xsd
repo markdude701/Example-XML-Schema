@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="https://www.highmarkblueshield.com/patient"
+    xmlns:tns="https://www.highmarkblueshield.com/patient"
+    elementFormDefault="qualified"
+    >
+    <!--Patient element definition-->
+    <element name="patient" type="tns:patient"/>
+    
+    <!--Patient element complex type -->
+    
+    <complexType name= "patient">
+        <sequence>
+            <element name="name" type="tns:string15Chars"/>
+            <element name="age" type="int"/>
+            <element name="email" type="string" minOccurs="0"/>
+            <element name="gender" type="tns:gender"/>
+            <element name="phone" type="tns:phoneFormat" maxOccurs="unbounded"/>
+            <element name="payment" type="tns:paymentType"/>
+        </sequence>
+        
+        <!--User name Attr -->
+        <attribute name="id" type="tns:idFormat" use="required"/>
+    </complexType>
+    
+
+    
+    
+    <!-- Payment type complex type-->
+    <complexType name="paymentType">
+        <choice>
+            <element name="cash" type="decimal"/>
+            <element name="insurance" type="tns:InsuranceInfo"/>
+        </choice>
+    </complexType>
+    
+    <!--Insurance info -->
+    <complexType name="InsuranceInfo">
+        <all>
+            <element name="provider"/>
+            <element name="limit" type="decimal"/>
+        </all>
+    </complexType>
+    
+    
+    <!-- String limit to 15 characters-->
+    <simpleType name="string15Chars">
+        <restriction base="string">
+            <maxLength value="15" />
+        </restriction>
+    </simpleType>
+    
+    <!--Gender restriction = Female/Male/Other-->
+    
+    <simpleType name="gender">
+        <restriction base="string">
+            <enumeration value="M"></enumeration>
+            <enumeration value="F"></enumeration>
+            <enumeration value="O"></enumeration>
+        </restriction>
+    </simpleType>
+    
+    
+    <!-- Restrict the ID to 8 chars -->
+    <simpleType name="idFormat">
+        <restriction base="int">
+            <pattern value="([0-9]{8})"/>
+        </restriction>
+    </simpleType>
+    
+    
+    <!-- Restrict the phone number to 10 numbers, with formatting -->
+    <simpleType name="phoneFormat">
+        <restriction base="string">
+            <pattern value="(\d{3}[-.]?\d{3})[-.]?\d{4}"/>
+        </restriction>
+        
+        
+    </simpleType>
+    
+    
+    
+</schema>

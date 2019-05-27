@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patient xmlns="https://www.highmarkblueshield.com/patient"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    >
+    <name>Granny</name>
+    <age>99</age>
+    <gender>F</gender>
+    <phone>123-456-789</phone>
+    <payment>
+        <insurance>
+            <provider>Highmark</provider>
+            <limit>100.0</limit>
+        </insurance>
+        
+        
+    </payment>
+        
+</patient>
